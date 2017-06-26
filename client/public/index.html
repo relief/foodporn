@@ -13,7 +13,10 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Food Lookup Demo</title>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.css">
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.4/jquery.mobile-1.4.4.min.js"></script>
+    <title>Food porn</title>
   </head>
   <body>
     <div id="root"></div>
@@ -28,4 +31,34 @@
       To create a production bundle, use `npm run build`.
     -->
   </body>
+  <script type="text/javascript">
+    $(document).ready(function(){
+
+    $(".buddy").on("swiperight",function(){
+      $(this).addClass('rotate-left').delay(700).fadeOut(1);
+      $('.buddy').find('.status').remove();
+
+      $(this).append('<div class="status like">Like!</div>');      
+      if ( $(this).is(':last-child') ) {
+        $('.buddy:nth-child(1)').removeClass ('rotate-left rotate-right').fadeIn(300);
+       } else {
+          $(this).next().removeClass('rotate-left rotate-right').fadeIn(400);
+       }
+    });  
+
+   $(".buddy").on("swipeleft",function(){
+    $(this).addClass('rotate-right').delay(700).fadeOut(1);
+    $('.buddy').find('.status').remove();
+    $(this).append('<div class="status dislike">Dislike!</div>');
+
+    if ( $(this).is(':last-child') ) {
+     $('.buddy:nth-child(1)').removeClass ('rotate-left rotate-right').fadeIn(300);
+      alert('OUPS');
+     } else {
+        $(this).next().removeClass('rotate-left rotate-right').fadeIn(400);
+    } 
+  });
+
+});
+  </script>
 </html>
