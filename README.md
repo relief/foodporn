@@ -72,4 +72,6 @@ Heroku will give you a link at which to view your live app.
 
 # Links
 
-More info about the framework https://github.com/fullstackreact/food-lookup-demo
+More info about the framework 
+github: https://github.com/fullstackreact/food-lookup-demo
+tutorial: https://www.fullstackreact.com/articles/using-create-react-app-with-a-server/#enter-create-react-app
