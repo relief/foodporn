@@ -6,21 +6,19 @@ https://foodporns.herokuapp.com
 
 ```
 git clone git@github.com:relief/foodporn.git
-cd food-lookup-demo
-npm i
+cd foodporn
+npm i # install dependency for the api server
 
 cd client
-npm i
+npm i # install dependency for the client server
 
 cd ..
-npm start
+npm start # start api server on port 3000 and client server on port 3001
 ```
 
 # Deploying
 
 ## Background
-
-The app is ready to be deployed to Heroku.
 
 In production, Heroku will use `Procfile` which boots just the server:
 
