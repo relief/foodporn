@@ -8,6 +8,15 @@ function search(query, cb) {
     .then(cb);
 }
 
+function fetchEntries(query, cb) {
+  return fetch(`api/food?q=${query}`, {
+    accept: "application/json"
+  })
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+
 function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
@@ -23,5 +32,5 @@ function parseJSON(response) {
   return response.json();
 }
 
-const Client = { search };
+const Client = { search, fetchEntries };
 export default Client;

@@ -7,6 +7,6 @@ import "./stylesheets/index.css";
 import "../semantic/dist/semantic.min.css";
 
 ReactDOM.render(
-  <Swiper />,
+  <Swiper filter={2} />,
   document.getElementById("root") // eslint-disable-line no-undef
 );
