@@ -29,36 +29,49 @@ class Swiper extends Component {
       }
     }
 
+    animation = (current, rotateLeft, rotateRight) => {
+      this.setState({ current, rotateLeft, rotateRight });
+    }
+
     prevEntrie = () => {
       const current = this.state.current;
       if (current === 0)
-        this.setState({ current: this.state.entries.length - 1 });
+        this.animation(this.state.entries.length - 1, -1, current)
       else
-        this.setState({ current: current - 1 })
+        this.animation(current - 1, -1, current)
     }
 
     nextEntrie = () => {
       const current = this.state.current;
       if (current === this.state.entries.length - 1)
-        this.setState({ current: 0 });
+        this.animation(0, current, -1)
       else
-        this.setState({ current: current + 1 })
+        this.animation(current + 1, current, -1)
+    }
+
+    className = (idx) => {
+      switch (idx) {
+        case this.state.current:
+          return "buddy on"
+        case this.state.rotateLeft:
+          return "buddy rotate-left";
+        case this.state.rotateRight:
+          return "buddy rotate-right"
+        default:
+          return "buddy"
+      }
     }
 
     render() {
-        const images = this.state.entries.map((img, idx) => {
-            return <Entrie key={idx}
-                           className={"buddy " + (idx === this.state.current ? "on" : "")}
-                           prevEntrie={this.prevEntrie}
-                           nextEntrie={this.nextEntrie}
-                           imageUrl={img.image_url} />
-        });
-
-        console.log(images);
-
         return (
           <div id="container">
-            {images}
+            {this.state.entries.map((img, idx) =>
+               <Entrie key={idx}
+                       className={this.className(idx)}
+                       prevEntrie={this.prevEntrie}
+                       nextEntrie={this.nextEntrie}
+                       imageUrl={img.image_url} />
+            )}
           </div>
         );
     }
