@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Swipe from 'react-swipe-component';
+import Swipeable from 'react-swipeable'
 
 class Entrie extends Component {
 
@@ -10,7 +10,7 @@ class Entrie extends Component {
       this.onSwipeRightListener = this._onSwipeRightListener.bind(this);
       this.onSwipeDownListener = this._onSwipeUpListener.bind(this);
       this.onSwipeUpListener = this._onSwipeDownListener.bind(this);
-      this.onSwipeListener = this._onSwipeListener.bind(this);
+      this.onTapListener = this._onTapListener.bind(this);
     }
 
     _onSwipeLeftListener(){
@@ -27,9 +27,8 @@ class Entrie extends Component {
     _onSwipeDownListener() {
       console.log("Swiped down");
     }
-    _onSwipeListener(e){
-        // if (e[1]===0) console.log("Swipe x: "+e[0]);
-        // else if (e[0]===0) console.log("Swipe y: "+e[1]);
+    _onTapListener(e){
+      console.log("tap");
     }
 
     render() {
@@ -37,19 +36,19 @@ class Entrie extends Component {
         backgroundImage: 'url(' + this.props.imageUrl + ')'
       }
       return (
-        <Swipe 
+        <Swipeable 
           nodeName="div"
           className={this.props.className}
-          mouseSwipe={false}
+          trackMouse={true}
           onSwipedLeft={this.onSwipeLeftListener} 
           onSwipedRight={this.onSwipeRightListener} 
           onSwipedDown={this.onSwipeDownListener} 
           onSwipedUp={this.onSwipeUpListener}
-          onSwipe={this.onSwipeListener}>
+          onTap={this.onTapListener}>
             
             <div className="avatar" style={imageStyle} >
             </div>
-        </Swipe>
+        </Swipeable>
       );
     }
 }
