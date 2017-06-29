@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Picker, FormCell, CellBody, CellHeader, Label, Input } from 'react-weui';
+import { Picker, FormCell, CellBody, Label } from 'react-weui';
+import "./stylesheets/location_picker.css";
 
 class LocationPicker extends Component {
 
@@ -35,20 +36,15 @@ class LocationPicker extends Component {
     render() {
         return (
           <FormCell>
-            <CellHeader>
-                <Label>City</Label>
-            </CellHeader>
             <CellBody>
-                <Input
-                    type="text"
+                <Label
                     onClick={e=>{
                         e.preventDefault()
                         this.setState({picker_show: true})
                     }}
-                    placeholder="Pick a item"
-                    value={this.props.location}
-                    readOnly={true}
-                />
+                >
+                  {this.props.location} <span className="caret"></span>
+                </Label>
                 <Picker
                     onChange={selected=>{
                         let value = ''
