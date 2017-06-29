@@ -14,7 +14,6 @@
     "react-dom": "^15.4.0",
     "react-swipeable": "^4.0.1",
     "react-weui": "^1.0.3",
-    "semantic-ui": "^2.2.10",
     "weui": "^1.1.0"
   },
   "scripts": {
