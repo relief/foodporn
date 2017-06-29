@@ -40,6 +40,7 @@ class Entrie extends Component {
           nodeName="div"
           className={this.props.className}
           trackMouse={true}
+          style={{touchAction: 'none'}}
           onSwipedLeft={this.onSwipeLeftListener} 
           onSwipedRight={this.onSwipeRightListener} 
           onSwipedDown={this.onSwipeDownListener} 

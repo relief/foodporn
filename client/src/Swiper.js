@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import Client from "./Client";
 import Entrie from "./Entrie";
+import "./stylesheets/swiper.css";
 
 class Swiper extends Component {
 
@@ -64,7 +65,7 @@ class Swiper extends Component {
 
     render() {
         return (
-          <div id="container">
+          <div id="swiper">
             {this.state.entries.map((img, idx) =>
                <Entrie key={idx}
                        className={this.className(idx)}
