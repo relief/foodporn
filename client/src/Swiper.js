@@ -65,7 +65,7 @@ class Swiper extends Component {
 
     render() {
         return (
-          <div id="swiper">
+          <div className="swiper">
             {this.state.entries.map((img, idx) =>
                <Entrie key={idx}
                        className={this.className(idx)}

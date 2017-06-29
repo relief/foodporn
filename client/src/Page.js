@@ -17,7 +17,7 @@ class Page extends Component {
     
     render() {
         return (
-          <div id="container">
+          <div>
             <LocationPicker location={this.state.location} 
                             changeLocation={this.changeLocation} />
             <Swiper filter={0} />

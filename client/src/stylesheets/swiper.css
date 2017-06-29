@@ -1,8 +1,9 @@
-#container {
+
+.swiper {
   width: 100vw;
-  height: 100vh;
+  height: 100vw;
+  overflow-x: hidden;
   display: block;
-  background: white;
   position: relative;
   list-style-type: none;
   -webkit-touch-callout: none;
