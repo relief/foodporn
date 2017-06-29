@@ -22,6 +22,11 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <script type="text/javascript">
+      document.querySelector('body').addEventListener('touchstart', function (ev) {
+          event.preventDefault();
+      });
+    </script>
     <title>Food Porn</title>
   </head>
   <body>
