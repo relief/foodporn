@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import Client from "./Client";
 import Entrie from "./Entrie";
+import DetailPage from "./DetailPage";
 import "./stylesheets/swiper.css";
 
 class Swiper extends Component {
@@ -10,6 +11,7 @@ class Swiper extends Component {
     constructor(props) {
       super(props);
       this.state = {
+        showDetailPage: false,
         entries: [],
         filter: props.filter
       };
@@ -63,6 +65,14 @@ class Swiper extends Component {
       }
     }
 
+    showDetailPage = () => {
+      this.setState({ showDetailPage: true })
+    }
+
+    hideDetailPage = () => {
+      this.setState({ showDetailPage: false })
+    }
+
     render() {
         return (
           <div className="swiper">
@@ -71,8 +81,12 @@ class Swiper extends Component {
                        className={this.className(idx)}
                        prevEntrie={this.prevEntrie}
                        nextEntrie={this.nextEntrie}
-                       imageUrl={img.image_url} />
+                       imageUrl={img.image_url} 
+                       onTap={this.showDetailPage} />
             )}
+            <DetailPage img={this.state.entries[this.state.current]}
+                        show={this.state.showDetailPage}
+                        hideDetailPage={this.hideDetailPage} />
           </div>
         );
     }

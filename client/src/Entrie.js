@@ -29,6 +29,7 @@ class Entrie extends Component {
     }
     _onTapListener(e){
       console.log("tap");
+      this.props.onTap();
     }
 
     render() {
