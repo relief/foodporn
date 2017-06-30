@@ -75,19 +75,20 @@ class Swiper extends Component {
 
     render() {
         return (
-          <div className="swiper">
-            {this.state.entries.map((img, idx) =>
-               <Entrie key={idx}
-                       className={this.className(idx)}
-                       prevEntrie={this.prevEntrie}
-                       nextEntrie={this.nextEntrie}
-                       imageUrl={img.image_url} 
-                       onTap={this.showDetailPage} />
-            )}
-            <DetailPage img={this.state.entries[this.state.current]}
-                        show={this.state.showDetailPage}
-                        hideDetailPage={this.hideDetailPage} />
-          </div>
+            <div className="swiper">
+                {this.state.entries.map((img, idx) =>
+                   <Entrie key={idx}
+                           className={this.className(idx)}
+                           prevEntrie={this.prevEntrie}
+                           nextEntrie={this.nextEntrie}
+                           imageUrl={img.image_url} 
+                           onTap={this.showDetailPage} />
+                )}
+                <DetailPage img={this.state.entries[this.state.current]}
+                          show={this.state.showDetailPage}
+                          hideDetailPage={this.hideDetailPage} />
+            </div>
+            
         );
     }
 }

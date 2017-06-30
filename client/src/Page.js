@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Swiper from "./Swiper";
-import LocationPicker from "./LocationPicker";
 //import styles
 import 'weui';
 import 'react-weui/lib/react-weui.min.css';
@@ -17,9 +16,9 @@ class Page extends Component {
     
     render() {
         return (
-          <div>
-            <LocationPicker location={this.state.location} 
-                            changeLocation={this.changeLocation} />
+          <div className="full-page">
+{/*             <LocationPicker location={this.state.location} 
+                            changeLocation={this.changeLocation} /> */}
             <Swiper filter={0} />
           </div>
         );

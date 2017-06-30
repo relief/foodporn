@@ -33,9 +33,6 @@ class Entrie extends Component {
     }
 
     render() {
-      const imageStyle = {
-        backgroundImage: 'url(' + this.props.imageUrl + ')'
-      }
       return (
         <Swipeable 
           nodeName="div"
@@ -47,9 +44,7 @@ class Entrie extends Component {
           onSwipedDown={this.onSwipeDownListener} 
           onSwipedUp={this.onSwipeUpListener}
           onTap={this.onTapListener}>
-            
-            <div className="avatar" style={imageStyle} >
-            </div>
+            <img className="avatar" src={this.props.imageUrl} role="presentation" />
         </Swipeable>
       );
     }
