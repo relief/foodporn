@@ -45,6 +45,7 @@
 .avatar {
   display: block;
   width: 100vw;
+  max-height: 90vh;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;

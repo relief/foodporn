@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 function fetchEntries(query, cb) {
-  return fetch(`api/food?q=${query}`, {
+  return fetch(`api/entrie?q=${query}`, {
     accept: "application/json"
   })
     .then(checkStatus)

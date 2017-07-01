@@ -15,9 +15,8 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-const COLUMNS = [
+const ENTRIE_COLUMNS = [
   "Id",
-  "TrimURL",
   "OURL",
   "Restaurant_Id",
   "Restaurant"
@@ -36,7 +35,7 @@ const RESTAURANT_COLUMNS = [
   "Link",
 ];
 
-app.get("/api/food", (req, res) => {
+app.get("/api/entrie", (req, res) => {
   const param = req.query.q;
 
   if (!param) {
@@ -50,9 +49,8 @@ app.get("/api/food", (req, res) => {
   // is not protected against SQL injections.
   const r = db.exec(
     `
-      select ${COLUMNS.join(", ")} from entries
-      where Id>${param}
-      limit 100
+      SELECT ${ENTRIE_COLUMNS.join(", ")} FROM entries
+      ORDER BY RANDOM() LIMIT 100
     `
   );
 

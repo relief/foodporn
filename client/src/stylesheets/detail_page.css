@@ -1,0 +1,9 @@
+.text-align-center {
+  text-align: center !important;
+}
+
+.detail-page_image {
+  width: 50vw;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}

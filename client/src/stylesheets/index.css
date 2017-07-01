@@ -10,7 +10,6 @@ body {
 	color: #111;
 }
 
-
 .flex-grow{
     -webkit-box-flex: 1.0;
     -moz-flex-grow: 1;
@@ -85,7 +84,7 @@ body {
     flex-direction: column-reverse;
 }
 
-.flex-horizontal-center{
+.flex-horizontal-center {
     -webkit-box-pack: center;
     -moz-justify-content: center;
     -webkit-justify-content: center;

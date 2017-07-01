@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Popup, Article } from 'react-weui';
+import { Popup, Preview, PreviewHeader, PreviewFooter, PreviewBody, PreviewItem, PreviewButton } from 'react-weui';
 import Client from "./Client";
+import "./stylesheets/detail_page.css";
 
 class DetailPage extends Component {
-    state = {
-    }
-
     componentWillReceiveProps = (nextProps) => {
       if (!this.props.show && nextProps.show && nextProps.img) {
         const id = this.props.img.Restaurant_Id;
@@ -29,33 +27,40 @@ class DetailPage extends Component {
       }
     }
 
+    trimURL = () => {
+      const url = this.props.img.OURL;
+      return url.substring(0, url.length - 5) + '258s.jpg'
+    }
+
     render() {
       return (
         <Popup show={this.props.show}>
-          <div style={{height: '100vh', overflow: 'scroll'}}>
-            <Article>
-              <h1>{this.state.Name}</h1>
-              <section>
-                <h2 className="title">{this.state.Address}</h2>
-                <section>
-                    <h3>{this.state.Rating}</h3>
-                    <h3>{this.state.Price}</h3>
-                    <h3>{this.state.ReviewCount}</h3>
-                    <h3>{this.state.Style}</h3>
-                    <p>
-                        {this.props.img &&
-                          <img src={this.props.img.OURL}
-                               alt="Entrie"
-                               style={{width: '30vw'}}/>
-                        }
-                    </p>
-                </section>
-                <section>
-                    <p>{this.state.PhoneNumber}</p>
-                </section>
-              </section>
-              <Button onClick={e=>this.props.hideDetailPage()}>Close Popup</Button>
-            </Article>
+          <div className="flex-col flex-horizontal-center"
+               style={{height: '100vh', overflow: 'scroll'}}>
+            {this.state &&
+              <Preview>
+                <PreviewHeader className="text-align-center">
+                  {this.props.img &&
+                      <img src={this.trimURL()}
+                           className="detail-page_image"
+                           alt="Entrie" />
+                  }
+                </PreviewHeader>
+                <PreviewBody>
+                  
+                    <PreviewItem label="Restaurant" value={this.state.Name} />
+                    <PreviewItem label="Price" value={this.state.Price} />
+                    <PreviewItem label="Phone" value={this.state.PhoneNumber} />
+                    <PreviewItem label="Address" value={this.state.Address} />
+
+                </PreviewBody>
+                <PreviewFooter>
+                    <PreviewButton primary onClick={e=>this.props.hideDetailPage()}>
+                      Back to Photos
+                    </PreviewButton>
+                </PreviewFooter>
+              </Preview>
+            }
           </div>
         </Popup>
       );
