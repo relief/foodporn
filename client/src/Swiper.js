@@ -7,12 +7,13 @@ import DetailPage from "./DetailPage";
 import { Toast } from 'react-weui';
 import "./stylesheets/swiper.css";
 
-const NUM_PRELOAD_IMG = 4;
+const NUM_PRELOAD_IMG = 3;
 class Swiper extends Component {
     state = {
       showLoading: true,
       showDetailPage: false,
       entries: [],
+      loadList: [],
     }
 
     constructor(props) {
@@ -29,7 +30,8 @@ class Swiper extends Component {
           this.setState({
             entries: entries,
             current: 0,
-            showLoading: false
+            showLoading: false,
+            loadList: [0, 1, 2, entries.length - 1, entries.length - 2],
           });
         });
       }
@@ -37,6 +39,7 @@ class Swiper extends Component {
 
     animation = (current, rotateLeft, rotateRight) => {
       this.setState({ current, rotateLeft, rotateRight });
+      this.expandLoadList();
     }
 
     prevEntrie = () => {
@@ -76,26 +79,20 @@ class Swiper extends Component {
       this.setState({ showDetailPage: false })
     }
 
-    loadList = () => {
+    expandLoadList = () => {
       const current = this.state.current;
       const length = this.state.entries.length;
+      const loadList = this.state.loadList;
 
-      if (length === 0) 
-        return [];
+      let left = current - NUM_PRELOAD_IMG;
+      if (left < 0) left += length;
+      let right = current + NUM_PRELOAD_IMG;
+      if (right >= length) right -= length;
 
-      const loadList = [current];
-      let left, right, i;
-      for (i=1; i < NUM_PRELOAD_IMG; i++) {
-        left = current - i;
-        if (left < 0) left += length;
-        right = current + i;
-        if (right >= length) right -= length;
-
+      if (!loadList.includes(left))
         loadList.push(left);
+      if (!loadList.includes(right))
         loadList.push(right);
-      }
-
-      return loadList;
     }
 
     render() {
@@ -104,7 +101,7 @@ class Swiper extends Component {
                 <Toast icon="loading" show={this.state.showLoading}>
                   Loading...
                 </Toast>
-                {this.loadList().map((idx) => 
+                {this.state.loadList.map((idx) => 
                     <Entrie key={idx}
                             className={this.className(idx)}
                             prevEntrie={this.prevEntrie}
