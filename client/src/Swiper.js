@@ -81,12 +81,12 @@ class Swiper extends Component {
                            className={this.className(idx)}
                            prevEntrie={this.prevEntrie}
                            nextEntrie={this.nextEntrie}
-                           imageUrl={img.image_url} 
+                           imageUrl={img.OURL} 
                            onTap={this.showDetailPage} />
                 )}
                 <DetailPage img={this.state.entries[this.state.current]}
-                          show={this.state.showDetailPage}
-                          hideDetailPage={this.hideDetailPage} />
+                            show={this.state.showDetailPage}
+                            hideDetailPage={this.hideDetailPage} />
             </div>
             
         );

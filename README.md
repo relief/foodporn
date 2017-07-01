@@ -17,7 +17,7 @@ npm start # start api server on port 3000 and client server on port 3001
 ```
 # Data Manage
 
-All entries data are stored in ```raw-entries.csv```. After making changes to the csv file, we can reflect the changes to the db by running following commands
+After making changes to the csv file, we can reflect the changes to the db by running following commands
 
 ```
 cd db/seed

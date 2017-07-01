@@ -16,9 +16,24 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const COLUMNS = [
-  "entrie_id",
-  "restaurant_id",
-  "image_url"
+  "Id",
+  "TrimURL",
+  "OURL",
+  "Restaurant_Id",
+  "Restaurant"
+];
+
+const RESTAURANT_COLUMNS = [
+  "Id",
+  "Name",
+  "Rating",
+  "ReviewCount",
+  "Price",
+  "Style",
+  "Neighborhood",
+  "Address",
+  "PhoneNumber",
+  "Link",
 ];
 
 app.get("/api/food", (req, res) => {
@@ -36,8 +51,8 @@ app.get("/api/food", (req, res) => {
   const r = db.exec(
     `
       select ${COLUMNS.join(", ")} from entries
-      where entrie_id>${param}
-      limit 10
+      where Id>${param}
+      limit 100
     `
   );
 
@@ -56,6 +71,42 @@ app.get("/api/food", (req, res) => {
     res.json([]);
   }
 });
+
+app.get("/api/rest", (req, res) => {
+  const param = req.query.q;
+
+  if (!param) {
+    res.json({
+      error: "Missing required parameter `q`"
+    });
+    return;
+  }
+
+  // WARNING: Not for production use! The following statement
+  // is not protected against SQL injections.
+  const r = db.exec(
+    `
+      select * from restaurants
+      where Id=${param}
+    `
+  );
+
+  if (r[0]) {
+    res.json(
+      r[0].values.map(entry => {
+        const e = {};
+        RESTAURANT_COLUMNS.forEach((c, idx) => {
+          // combine fat columns
+            e[c] = entry[idx];
+        });
+        return e;
+      })
+    );
+  } else {
+    res.json([]);
+  }
+});
+
 
 app.listen(app.get("port"), () => {
   console.log(`Find the server at: http://localhost:${app.get("port")}/`); // eslint-disable-line no-console

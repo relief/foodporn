@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-function search(query, cb) {
+function fetchEntries(query, cb) {
   return fetch(`api/food?q=${query}`, {
     accept: "application/json"
   })
@@ -8,8 +8,8 @@ function search(query, cb) {
     .then(cb);
 }
 
-function fetchEntries(query, cb) {
-  return fetch(`api/food?q=${query}`, {
+function fetchRestaurant(query, cb) {
+  return fetch(`api/rest?q=${query}`, {
     accept: "application/json"
   })
     .then(checkStatus)
@@ -32,5 +32,5 @@ function parseJSON(response) {
   return response.json();
 }
 
-const Client = { search, fetchEntries };
+const Client = { fetchRestaurant, fetchEntries };
 export default Client;
