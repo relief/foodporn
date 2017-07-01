@@ -58,8 +58,7 @@ app.get("/api/entrie", (req, res) => {
     res.json(
       r[0].values.map(entry => {
         const e = {};
-        COLUMNS.forEach((c, idx) => {
-          // combine fat columns
+        ENTRIE_COLUMNS.forEach((c, idx) => {
             e[c] = entry[idx];
         });
         return e;
@@ -94,7 +93,6 @@ app.get("/api/rest", (req, res) => {
       r[0].values.map(entry => {
         const e = {};
         RESTAURANT_COLUMNS.forEach((c, idx) => {
-          // combine fat columns
             e[c] = entry[idx];
         });
         return e;
