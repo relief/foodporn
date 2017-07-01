@@ -1,3 +1,5 @@
+require('newrelic');
+
 const express = require("express");
 const fs = require("fs");
 const sqlite = require("sql.js");
