@@ -3,7 +3,16 @@ import { Popup, Preview, PreviewHeader, PreviewFooter, PreviewBody, PreviewItem,
 import Client from "./Client";
 import "./stylesheets/detail_page.css";
 
+const LOADING_STATE = {
+  Name: 'Loading',
+  Price: 'Loading',
+  PhoneNumber: 'Loading',
+  Address: 'Loading'
+}
+
 class DetailPage extends Component {
+    state = LOADING_STATE
+
     componentWillReceiveProps = (nextProps) => {
       if (!this.props.show && nextProps.show && nextProps.img) {
         const id = this.props.img.Restaurant_Id;
@@ -27,6 +36,11 @@ class DetailPage extends Component {
       }
     }
 
+    onClickPrimaryButton = (e) => {
+      this.setState(LOADING_STATE);
+      this.props.hideDetailPage();
+    }
+
     trimURL = () => {
       const url = this.props.img.OURL;
       return url.substring(0, url.length - 5) + '258s.jpg'
@@ -47,15 +61,13 @@ class DetailPage extends Component {
                   }
                 </PreviewHeader>
                 <PreviewBody>
-                  
                     <PreviewItem label="Restaurant" value={this.state.Name} />
                     <PreviewItem label="Price" value={this.state.Price} />
                     <PreviewItem label="Phone" value={this.state.PhoneNumber} />
                     <PreviewItem label="Address" value={this.state.Address} />
-
                 </PreviewBody>
                 <PreviewFooter>
-                    <PreviewButton primary onClick={e=>this.props.hideDetailPage()}>
+                    <PreviewButton primary onClick={this.onClickPrimaryButton}>
                       Back to Photos
                     </PreviewButton>
                 </PreviewFooter>
