@@ -51,28 +51,26 @@ class DetailPage extends Component {
         <Popup show={this.props.show}>
           <div className="flex-col flex-horizontal-center"
                style={{height: '100vh', overflow: 'scroll'}}>
-            {this.state &&
-              <Preview>
-                <PreviewHeader className="text-align-center">
-                  {this.props.img &&
-                      <img src={this.trimURL()}
-                           className="detail-page_image"
-                           alt="Entrie" />
-                  }
-                </PreviewHeader>
-                <PreviewBody>
-                    <PreviewItem label="Restaurant" value={this.state.Name} />
-                    <PreviewItem label="Price" value={this.state.Price} />
-                    <PreviewItem label="Phone" value={this.state.PhoneNumber} />
-                    <PreviewItem label="Address" value={this.state.Address} />
-                </PreviewBody>
-                <PreviewFooter>
-                    <PreviewButton primary onClick={this.onClickPrimaryButton}>
-                      Back to Photos
-                    </PreviewButton>
-                </PreviewFooter>
-              </Preview>
-            }
+            <Preview>
+              <PreviewHeader className="text-align-center">
+                {this.props.img &&
+                    <img src={this.trimURL()}
+                         className="detail-page_image"
+                         alt="Entrie" />
+                }
+              </PreviewHeader>
+              <PreviewBody>
+                  <PreviewItem label="Restaurant" value={this.state.Name} />
+                  <PreviewItem label="Price" value={this.state.Price} />
+                  <PreviewItem label="Phone" value={this.state.PhoneNumber} />
+                  <PreviewItem label="Address" value={this.state.Address} />
+              </PreviewBody>
+              <PreviewFooter>
+                  <PreviewButton primary onClick={this.onClickPrimaryButton}>
+                    Back to Photos
+                  </PreviewButton>
+              </PreviewFooter>
+            </Preview>
           </div>
         </Popup>
       );

@@ -4,17 +4,19 @@ import React, { Component } from 'react';
 import Client from "./Client";
 import Entrie from "./Entrie";
 import DetailPage from "./DetailPage";
+import { Toast } from 'react-weui';
 import "./stylesheets/swiper.css";
 
+const NUM_PRELOAD_IMG = 4;
 class Swiper extends Component {
+    state = {
+      showLoading: true,
+      showDetailPage: false,
+      entries: [],
+    }
 
     constructor(props) {
       super(props);
-      this.state = {
-        showDetailPage: false,
-        entries: [],
-        filter: props.filter
-      };
 
       this.handleSearchChange(this.props.filter);
     }
@@ -26,7 +28,8 @@ class Swiper extends Component {
         Client.fetchEntries(filter, entries => {
           this.setState({
             entries: entries,
-            current: 0
+            current: 0,
+            showLoading: false
           });
         });
       }
@@ -73,16 +76,41 @@ class Swiper extends Component {
       this.setState({ showDetailPage: false })
     }
 
+    loadList = () => {
+      const current = this.state.current;
+      const length = this.state.entries.length;
+
+      if (length === 0) 
+        return [];
+
+      const loadList = [current];
+      let left, right, i;
+      for (i=1; i < NUM_PRELOAD_IMG; i++) {
+        left = current - i;
+        if (left < 0) left += length;
+        right = current + i;
+        if (right >= length) right -= length;
+
+        loadList.push(left);
+        loadList.push(right);
+      }
+
+      return loadList;
+    }
+
     render() {
         return (
             <div className="swiper">
-                {this.state.entries.map((img, idx) =>
-                   <Entrie key={idx}
-                           className={this.className(idx)}
-                           prevEntrie={this.prevEntrie}
-                           nextEntrie={this.nextEntrie}
-                           imageUrl={img.OURL} 
-                           onTap={this.showDetailPage} />
+                <Toast icon="loading" show={this.state.showLoading}>
+                  Loading...
+                </Toast>
+                {this.loadList().map((idx) => 
+                    <Entrie key={idx}
+                            className={this.className(idx)}
+                            prevEntrie={this.prevEntrie}
+                            nextEntrie={this.nextEntrie}
+                            imageUrl={this.state.entries[idx].OURL}
+                            onTap={this.showDetailPage} />
                 )}
                 <DetailPage img={this.state.entries[this.state.current]}
                             show={this.state.showDetailPage}
