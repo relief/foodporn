@@ -41,24 +41,23 @@ class DetailPage extends Component {
       this.props.hideDetailPage();
     }
 
-    onClickLikeButton = (e) => {
-      Client.likeEntrie(this.props.img.id, rtn => {
-        this.props.onLike(this.props.img.id);
-      });
-    }
-
     cleanAddress = () => {
       let address = this.state.address;
       
       address = address.replace(/#/g, ', ');
       const indexV = address.indexOf('Vancouver');
-      // console.log(address);
-      // console.log(indexV);
       address = address.substring(0, indexV + 9);
       return address;
     }
 
+    cleanName = () => {
+      if (this.state.name) {
+        return this.state.name.replace(/ &amp;.*/, '');
+      }
+    }
+
     render() {
+
       return (
         <Popup show={this.props.show}>
           <div className="flex-col flex-horizontal-center"
@@ -72,7 +71,7 @@ class DetailPage extends Component {
                 }
               </PreviewHeader>
               <PreviewBody>
-                  <PreviewItem label="Restaurant" value={this.state.name} />
+                  <PreviewItem label="Restaurant" value={this.cleanName()} />
                   <PreviewItem label="Price" value={this.state.price} />
                   <PreviewItem label="Phone" value={this.state.phone_number} />
                   <PreviewItem label="Address" value={this.cleanAddress()} />
@@ -83,18 +82,11 @@ class DetailPage extends Component {
               </PreviewBody>
             </Preview>
             <ButtonArea direction="horizontal">
-                  <Button type="default"
-                          onClick={this.onClickBackButton}
-                          plain>
-                    Back
-                  </Button>
-                  {this.props.img &&
-                    <Button onClick={this.onClickLikeButton}
-                            disabled={this.props.likeList.includes(this.props.img.id)}>
-                      Like it!
-                    </Button>
-                  }
-                  
+              <Button type="default"
+                      onClick={this.onClickBackButton}
+                      plain>
+                Back to Photos
+              </Button>
             </ButtonArea>
           </div>
         </Popup>

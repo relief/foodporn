@@ -73,6 +73,7 @@ class Swiper extends Component {
     }
 
     showDetailPage = () => {
+      Client.likeEntrie(this.state.entries[this.state.current].id)
       this.setState({ showDetailPage: true })
     }
 
@@ -96,31 +97,12 @@ class Swiper extends Component {
         loadList.push(right);
     }
 
-    onLikeEntrie = (entrie_id) => {
-      const likeList = this.state.likeList;
-      likeList.push(entrie_id);
-      this.setState({ likeList });
-    }
-
     render() {
-        const currentEntrie = this.state.entries[this.state.current]
-        if (currentEntrie) {
-          currentEntrie.restaurant_name = currentEntrie.restaurant_name.replace(/ &amp;.*/, '')
-        } 
-
         return (
             <div className="swiper">
                 <Toast icon="loading" show={this.state.showLoading}>
                   Loading...
                 </Toast>
-                {currentEntrie &&
-                  <h3
-                    className="title"
-                    onClick={this.showDetailPage}
-                  >
-                    {currentEntrie.restaurant_name}
-                  </h3>
-                }
                 {this.state.loadList.map((idx) => 
                     <Entrie key={idx}
                             className={this.className(idx)}
@@ -129,11 +111,9 @@ class Swiper extends Component {
                             imageUrl={this.state.entries[idx].url + 'o.jpg'}
                             onTap={this.showDetailPage} />
                 )}
-                <DetailPage img={currentEntrie}
+                <DetailPage img={this.state.entries[this.state.current]}
                             show={this.state.showDetailPage}
-                            hideDetailPage={this.hideDetailPage}
-                            onLike={this.onLikeEntrie}
-                            likeList={this.state.likeList} />
+                            hideDetailPage={this.hideDetailPage} />
             </div>
             
         );
