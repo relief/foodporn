@@ -4,10 +4,10 @@ import Client from "./Client";
 import "./stylesheets/detail_page.css";
 
 const LOADING_STATE = {
-  Name: 'Loading',
-  Price: 'Loading',
-  PhoneNumber: 'Loading',
-  Address: 'Loading'
+  name: 'Loading',
+  price: 'Loading',
+  phone_number: 'Loading',
+  address: 'Loading'
 }
 
 class DetailPage extends Component {
@@ -15,10 +15,10 @@ class DetailPage extends Component {
 
     componentWillReceiveProps = (nextProps) => {
       if (!this.props.show && nextProps.show && nextProps.img) {
-        const id = this.props.img.Restaurant_Id;
+        const id = this.props.img.restaurant_id;
 
         Client.fetchRestaurant(id, restaurants => {
-          this.setState(restaurants[0]);
+          this.setState(restaurants);
         });
       }
     }
@@ -41,13 +41,8 @@ class DetailPage extends Component {
       this.props.hideDetailPage();
     }
 
-    trimURL = () => {
-      const url = this.props.img.OURL;
-      return url.substring(0, url.length - 5) + '258s.jpg'
-    }
-
     cleanAddress = () => {
-      let address = this.state.Address;
+      let address = this.state.address;
       
       address = address.replace(/#/g, ', ');
       const indexV = address.indexOf('Vancouver');
@@ -65,22 +60,22 @@ class DetailPage extends Component {
             <Preview>
               <PreviewHeader className="text-align-center">
                 {this.props.img &&
-                    <img src={this.trimURL()}
+                    <img src={this.props.img.url + '258s.jpg'}
                          className="detail-page_image"
                          alt="Entrie" />
                 }
               </PreviewHeader>
               <PreviewBody>
-                  <PreviewItem label="Restaurant" value={this.state.Name} />
-                  <PreviewItem label="Price" value={this.state.Price} />
-                  <PreviewItem label="Phone" value={this.state.PhoneNumber} />
+                  <PreviewItem label="Restaurant" value={this.state.name} />
+                  <PreviewItem label="Price" value={this.state.price} />
+                  <PreviewItem label="Phone" value={this.state.phone_number} />
                   <PreviewItem label="Address" value={this.cleanAddress()} />
               </PreviewBody>
               <PreviewFooter>
                   <PreviewButton onClick={this.onClickPrimaryButton}>
                     Back
                   </PreviewButton>
-                  {this.state.Address &&
+                  {this.state.address &&
                     <PreviewButton primary 
                       href={"https://maps.google.com/?q=" + this.cleanAddress()} >
                       Open in Map

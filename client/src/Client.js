@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 function fetchEntries(query, cb) {
-  return fetch(`api/entrie?q=${query}`, {
+  return fetch(`api/entries`, {
     accept: "application/json"
   })
     .then(checkStatus)
@@ -9,7 +9,7 @@ function fetchEntries(query, cb) {
 }
 
 function fetchRestaurant(query, cb) {
-  return fetch(`api/rest?q=${query}`, {
+  return fetch(`api/restaurant/${query}`, {
     accept: "application/json"
   })
     .then(checkStatus)
