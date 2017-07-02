@@ -46,6 +46,17 @@ class DetailPage extends Component {
       return url.substring(0, url.length - 5) + '258s.jpg'
     }
 
+    cleanAddress = () => {
+      let address = this.state.Address;
+      
+      address = address.replace(/#/g, ',');
+      const indexV = address.indexOf('Vancouver');
+      // console.log(address);
+      // console.log(indexV);
+      address = address.substring(0, indexV + 9);
+      return address;
+    }
+
     render() {
       return (
         <Popup show={this.props.show}>
@@ -63,12 +74,18 @@ class DetailPage extends Component {
                   <PreviewItem label="Restaurant" value={this.state.Name} />
                   <PreviewItem label="Price" value={this.state.Price} />
                   <PreviewItem label="Phone" value={this.state.PhoneNumber} />
-                  <PreviewItem label="Address" value={this.state.Address} />
+                  <PreviewItem label="Address" value={this.cleanAddress()} />
               </PreviewBody>
               <PreviewFooter>
-                  <PreviewButton primary onClick={this.onClickPrimaryButton}>
-                    Back to Photos
+                  <PreviewButton onClick={this.onClickPrimaryButton}>
+                    Back
                   </PreviewButton>
+                  {this.state.Address &&
+                    <PreviewButton primary 
+                      href={"https://maps.google.com/?q=" + this.cleanAddress()} >
+                      Open in Map
+                    </PreviewButton>
+                  }
               </PreviewFooter>
             </Preview>
           </div>
