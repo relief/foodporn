@@ -45,7 +45,7 @@
 .avatar {
   display: block;
   width: 100vw;
-  max-height: 90vh;
+  max-height: 80vh;
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
@@ -73,4 +73,10 @@
   top: 50px;
   left: 40px;
   text-shadow: none;
+}
+.title {
+  padding-top: 3vh;
+  height: 7vh;
+  color: white;
+  text-align: center;
 }

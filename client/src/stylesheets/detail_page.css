@@ -7,3 +7,7 @@
   -moz-border-radius: 50%;
   border-radius: 50%;
 }
+
+.open-in-map {
+  color: #0BB20C;
+}

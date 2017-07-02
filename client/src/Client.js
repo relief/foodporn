@@ -8,6 +8,16 @@ function fetchEntries(query, cb) {
     .then(cb);
 }
 
+function likeEntrie(query, cb) {
+  return fetch(`api/entrie/${query}?type=like`, {
+    method: "POST",
+    accept: "application/json"
+  })
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+
 function fetchRestaurant(query, cb) {
   return fetch(`api/restaurant/${query}`, {
     accept: "application/json"
@@ -32,5 +42,5 @@ function parseJSON(response) {
   return response.json();
 }
 
-const Client = { fetchRestaurant, fetchEntries };
+const Client = { fetchRestaurant, fetchEntries, likeEntrie };
 export default Client;

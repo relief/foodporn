@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Popup, Preview, PreviewHeader, PreviewFooter, PreviewBody, PreviewItem, PreviewButton } from 'react-weui';
+import { Popup, Preview, PreviewHeader, PreviewBody, PreviewItem, Button, ButtonArea } from 'react-weui';
 import Client from "./Client";
 import "./stylesheets/detail_page.css";
 
@@ -36,9 +36,15 @@ class DetailPage extends Component {
       }
     }
 
-    onClickPrimaryButton = (e) => {
+    onClickBackButton = (e) => {
       this.setState(LOADING_STATE);
       this.props.hideDetailPage();
+    }
+
+    onClickLikeButton = (e) => {
+      Client.likeEntrie(this.props.img.id, rtn => {
+        this.props.onLike(this.props.img.id);
+      });
     }
 
     cleanAddress = () => {
@@ -70,19 +76,26 @@ class DetailPage extends Component {
                   <PreviewItem label="Price" value={this.state.price} />
                   <PreviewItem label="Phone" value={this.state.phone_number} />
                   <PreviewItem label="Address" value={this.cleanAddress()} />
-              </PreviewBody>
-              <PreviewFooter>
-                  <PreviewButton onClick={this.onClickPrimaryButton}>
-                    Back
-                  </PreviewButton>
-                  {this.state.address &&
-                    <PreviewButton primary 
-                      href={"https://maps.google.com/?q=" + this.cleanAddress()} >
+                  <a href={"https://maps.google.com/?q=" + this.cleanAddress()}
+                     className="open-in-map" >
                       Open in Map
-                    </PreviewButton>
-                  }
-              </PreviewFooter>
+                  </a>
+              </PreviewBody>
             </Preview>
+            <ButtonArea direction="horizontal">
+                  <Button type="default"
+                          onClick={this.onClickBackButton}
+                          plain>
+                    Back
+                  </Button>
+                  {this.props.img &&
+                    <Button onClick={this.onClickLikeButton}
+                            disabled={this.props.likeList.includes(this.props.img.id)}>
+                      Like it!
+                    </Button>
+                  }
+                  
+            </ButtonArea>
           </div>
         </Popup>
       );
