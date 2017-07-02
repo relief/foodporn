@@ -11,7 +11,14 @@ const router = new Router()
 module.exports = router
 
 router.get('/', async (req, res) => {
-  const queryStr = 'select * from entries order by random() limit 100'
+  const queryStr = 'select * from entries order by random() limit 200'
   const { rows } = await db.query(queryStr)
-  res.send(rows)
+
+  rows.sort(sortByLike);
+
+  new_rows = rows.slice(100)
+
+  res.send(new_rows)
 })
+
+sortByLike = (a, b) => a.like - b.like;
