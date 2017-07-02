@@ -49,7 +49,7 @@ class DetailPage extends Component {
     cleanAddress = () => {
       let address = this.state.Address;
       
-      address = address.replace(/#/g, ',');
+      address = address.replace(/#/g, ', ');
       const indexV = address.indexOf('Vancouver');
       // console.log(address);
       // console.log(indexV);
