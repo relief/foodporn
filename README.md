@@ -1,12 +1,12 @@
 # Live site 
 
-https://foodporns.herokuapp.com
+https://yumrec.herokuapp.com
 
 # Running locally
 
 ```
-git clone git@github.com:relief/foodporn.git
-cd foodporn
+git clone git@github.com:relief/yumrec.git
+cd yumrec
 npm i # install dependency for the api server
 
 cd client

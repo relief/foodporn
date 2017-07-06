@@ -10,7 +10,7 @@ exports.config = {
   /**
    * Array of application names.
    */
-  app_name: ['foodporns'],
+  app_name: ['yumrec'],
   /**
    * Your New Relic license key.
    */
