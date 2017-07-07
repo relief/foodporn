@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "babel-core": "6.14.0",
+    "body-parser": "^1.17.2",
     "express": "4.13.3",
     "express-promise-router": "^1.1.1",
     "newrelic": "^1.40.0",

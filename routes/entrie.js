@@ -19,7 +19,6 @@ router.get('/:id', async (req, res) => {
 router.post('/:id', async (req, res) => {
   const { id } = req.params
   const { type } = req.query
-  console.log(req.query)
   switch (type) {
   	case 'like':
   	  await db.query('UPDATE entries SET "like"="like" + 1 WHERE id=$1', [id])

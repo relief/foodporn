@@ -1,7 +1,26 @@
 /* eslint-disable no-undef */
+
 function fetchEntries(query, cb) {
   return fetch(`api/entries`, {
     accept: "application/json"
+  })
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(cb);
+}
+
+function submitFeedback(comment, email, phone, cb) {
+  return fetch(`api/feedback`, {
+    method: "POST",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      comment: comment,
+      email: email,
+      phone: phone
+    })
   })
     .then(checkStatus)
     .then(parseJSON)
@@ -42,5 +61,5 @@ function parseJSON(response) {
   return response.json();
 }
 
-const Client = { fetchRestaurant, fetchEntries, likeEntrie };
+const Client = { fetchRestaurant, fetchEntries, likeEntrie, submitFeedback };
 export default Client;

@@ -12,7 +12,9 @@
     "babel-plugin-transform-class-properties": "6.22.0",
     "react": "^15.4.0",
     "react-dom": "^15.4.0",
+    "react-mixin": "^2.0.2",
     "react-swipeable": "^4.0.1",
+    "react-timer-mixin": "^0.13.3",
     "react-weui": "^1.0.3",
     "weui": "^1.1.0"
   },
